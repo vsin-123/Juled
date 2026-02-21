@@ -21,3 +21,5 @@ jobs:
           model: gpt-4o-mini  # Optional: default gpt-4o-mini
           max-files: 20       # Optional: default 20
           mode: devsecops     # Optional: default devsecops
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
