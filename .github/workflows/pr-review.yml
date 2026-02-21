@@ -18,7 +18,7 @@ jobs:
         uses: vsin-123/DevSecOpsAI_PR_Guard@v1.0.1
         with:
           ai-key: ${{ secrets.AI_API_KEY }}
-          provider: gemin
+          provider: gemini
           model: gemini-1.5-pro  # Optional: default gpt-4o-mini
           max-files: 20       # Optional: default 20
           mode: devsecops     # Optional: default devsecops
