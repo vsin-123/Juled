@@ -1,0 +1,23 @@
+name: PR Security Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: AI PR Review
+        uses: vsin-123/DevSecOpsAI_PR_Guard@v1.0.0
+        with:
+          ai-key: ${{ secrets.AI_API_KEY }}
+          model: gpt-4o-mini  # Optional: default gpt-4o-mini
+          max-files: 20       # Optional: default 20
+          mode: devsecops     # Optional: default devsecops
