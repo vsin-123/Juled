@@ -1,0 +1,99 @@
+name: 'PR Security Scanner'
+description: 'Comprehensive security scanner for GitHub PRs supporting all file types'
+author: 'Security Team'
+branding:
+  icon: 'shield'
+  color: 'red'
+
+inputs:
+  github-token:
+    description: 'GitHub token for PR comments'
+    required: true
+    default: ${{ github.token }}
+  scan-directory:
+    description: 'Directory to scan (default: repository root)'
+    required: false
+    default: '.'
+  fail-on:
+    description: 'Fail on severity level (critical, high, medium, low, none)'
+    required: false
+    default: 'high'
+  include-extensions:
+    description: 'Comma-separated list of file extensions to include'
+    required: false
+    default: ''
+  exclude-extensions:
+    description: 'Comma-separated list of file extensions to exclude'
+    required: false
+    default: ''
+  exclude-paths:
+    description: 'Comma-separated list of paths to exclude'
+    required: false
+    default: 'node_modules,dist,build,coverage,.git'
+  enable-owasp:
+    description: 'Enable OWASP Top 10 detection'
+    required: false
+    default: 'true'
+  enable-secrets:
+    description: 'Enable secret detection'
+    required: false
+    default: 'true'
+  custom-rules-path:
+    description: 'Path to custom security rules file'
+    required: false
+    default: ''
+  output-format:
+    description: 'Output format (json, sarif, markdown)'
+    required: false
+    default: 'markdown'
+  verbose:
+    description: 'Enable verbose logging'
+    required: false
+    default: 'false'
+  # AI-related inputs
+  enable-ai-analysis:
+    description: 'Enable AI-powered security analysis'
+    required: false
+    default: 'false'
+  ai-provider:
+    description: 'AI provider name to use (must be configured in config file)'
+    required: false
+    default: ''
+  ai-config-path:
+    description: 'Path to AI configuration file'
+    required: false
+    default: '.ai-config.json'
+  ai-batch-size:
+    description: 'Number of files to analyze in parallel with AI'
+    required: false
+    default: '5'
+  ai-max-concurrency:
+    description: 'Maximum concurrent AI requests'
+    required: false
+    default: '3'
+  ai-cost-limit:
+    description: 'Maximum spending per scan in USD'
+    required: false
+    default: '50'
+  ai-cache-results:
+    description: 'Cache AI responses to reduce costs'
+    required: false
+    default: 'true'
+
+outputs:
+  findings-count:
+    description: 'Total number of security findings'
+  critical-count:
+    description: 'Number of critical severity findings'
+  high-count:
+    description: 'Number of high severity findings'
+  medium-count:
+    description: 'Number of medium severity findings'
+  low-count:
+    description: 'Number of low severity findings'
+  report-path:
+    description: 'Path to the generated security report'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PR Security Scanner - AI Configuration</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-shield-alt"></i> PR Security Scanner</h1>
+            <p>AI-Powered Security Configuration</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="tab-button active" data-tab="overview">Overview</button>
+            <button class="tab-button" data-tab="ai-providers">AI Providers</button>
+            <button class="tab-button" data-tab="usage">Usage & Costs</button>
+            <button class="tab-button" data-tab="settings">General Settings</button>
+        </nav>
+
+        <!-- Overview Tab -->
+        <div id="overview" class="tab-content active">
+            <section class="card">
+                <h2><i class="fas fa-info-circle"></i> System Status</h2>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <i class="fas fa-brain"></i>
+                        <div>
+                            <h3>AI Analysis</h3>
+                            <span id="ai-status" class="status-badge">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-server"></i>
+                        <div>
+                            <h3>API Server</h3>
+                            <span id="server-status" class="status-badge">Running</span>
+                        </div>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h3>Scanner</h3>
+                            <span id="scanner-status" class="status-badge">Ready</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2><i class="fas fa-chart-line"></i> Quick Stats</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <i class="fas fa-eye"></i>
+                        <div>
+                            <span class="stat-number" id="total-scans">0</span>
+                            <span class="stat-label">Total Scans</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-dollar-sign"></i>
+                        <div>
+                            <span class="stat-number" id="total-cost">$0.00</span>
+                            <span class="stat-label">AI Costs</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <span class="stat-number" id="total-findings">0</span>
+                            <span class="stat-label">Security Findings</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- AI Providers Tab -->
+        <div id="ai-providers" class="tab-content">
+            <section class="card">
+                <div class="section-header">
+                    <h2><i class="fas fa-robot"></i> AI Providers</h2>
+                    <button id="add-provider-btn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Add Provider
+                    </button>
+                </div>
+                
+                <div id="providers-list" class="providers-grid">
+                    <!-- Providers will be loaded here -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Usage & Costs Tab -->
+        <div id="usage" class="tab-content">
+            <section class="card">
+                <h2><i class="fas fa-chart-bar"></i> Usage Statistics</h2>
+                <div id="usage-stats">
+                    <!-- Usage stats will be loaded here -->
+                </div>
+            </section>
+
+            <section class="card">
+                <h2><i class="fas fa-dollar-sign"></i> Cost Tracking</h2>
+                <div id="cost-summary" class="cost-grid">
+                    <!-- Cost info will be loaded here -->
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="section-header">
+                    <h2><i class="fas fa-broom"></i> Cache Management</h2>
+                    <button id="clear-cache-btn" class="btn btn-warning">
+                        <i class="fas fa-trash"></i> Clear Cache
+                    </button>
+                </div>
+                <p>Clear the AI response cache to free up memory or force fresh analyses.</p>
+            </section>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settings" class="tab-content">
+            <section class="card">
+                <h2><i class="fas fa-cog"></i> General Settings</h2>
+                <form id="settings-form">
+                    <div class="form-group">
+                        <label for="enable-ai">Enable AI Analysis</label>
+                        <input type="checkbox" id="enable-ai" name="enabled">
+                        <span class="help-text">Enable AI-powered security analysis in scans</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fallback-rules">Fallback to Static Rules</label>
+                        <input type="checkbox" id="fallback-rules" name="fallbackToStaticRules">
+                        <span class="help-text">Use static security rules if AI analysis fails</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="batch-size">AI Batch Size</label>
+                        <input type="number" id="batch-size" name="batchSize" min="1" max="20" value="5">
+                        <span class="help-text">Number of files to analyze in parallel</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="max-concurrency">Max Concurrency</label>
+                        <input type="number" id="max-concurrency" name="maxConcurrency" min="1" max="10" value="3">
+                        <span class="help-text">Maximum concurrent AI requests</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cost-limit">Cost Limit (USD)</label>
+                        <input type="number" id="cost-limit" name="costLimit" min="0" step="0.01" value="50">
+                        <span class="help-text">Maximum spending per scan</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cache-ttl">Cache TTL (hours)</label>
+                        <input type="number" id="cache-ttl" name="cacheTtl" min="1" max="168" value="24">
+                        <span class="help-text">How long to cache AI responses</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Save Settings
+                    </button>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add Provider Modal -->
+    <div id="provider-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Add AI Provider</h3>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="provider-form">
+                    <div class="form-group">
+                        <label for="provider-type">Provider Type</label>
+                        <select id="provider-type" name="type" required>
+                            <option value="">Select Provider</option>
+                            <option value="openai">OpenAI</option>
+                            <option value="azure-openai">Azure OpenAI</option>
+                            <option value="anthropic">Anthropic</option>
+                            <option value="google-ai">Google AI</option>
+                            <option value="ollama">Ollama (Self-hosted)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="provider-name">Provider Name</label>
+                        <input type="text" id="provider-name" name="name" required>
+                    </div>
+
+                    <div class="form-group provider-config" data-provider="openai">
+                        <label for="openai-api-key">API Key</label>
+                        <input type="password" id="openai-api-key" name="apiKey">
+                        <span class="help-text">Get from https://platform.openai.com/api-keys</span>
+                    </div>
+
+                    <div class="form-group provider-config" data-provider="azure-openai">
+                        <label for="azure-api-key">API Key</label>
+                        <input type="password" id="azure-api-key" name="apiKey">
+                    </div>
+
+                    <div class="form-group provider-config" data-provider="azure-openai">
+                        <label for="azure-endpoint">Endpoint URL</label>
+                        <input type="url" id="azure-endpoint" name="apiEndpoint" placeholder="https://your-resource.openai.azure.com/">
+                    </div>
+
+                    <div class="form-group provider-config" data-provider="azure-openai">
+                        <label for="azure-deployment">Deployment Name</label>
+                        <input type="text" id="azure-deployment" name="deploymentName">
+                    </div>
+
+                    <div class="form-group provider-config" data-provider="anthropic">
+                        <label for="anthropic-api-key">API Key</label>
+                        <input type="password" id="anthropic-api-key" name="apiKey">
+                        <span class="help-text">Get from https://console.anthropic.com/</span>
+                    </div>
+
+                    <div class="form-group provider-config" data-provider="google-ai">
+                        <label for="google-api-key">API Key</label>
+                        <input type="password" id="google-api-key" name="apiKey">
+                        <span class="help-text">Get from Google AI Studio</span>
+                    </div>
+
+                    <div class="form-group provider-config" data-provider="ollama">
+                        <label for="ollama-endpoint">Endpoint URL</label>
+                        <input type="url" id="ollama-endpoint" name="apiEndpoint" placeholder="http://localhost:11434">
+                        <span class="help-text">Ollama server endpoint</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="provider-model">Model</label>
+                        <select id="provider-model" name="model">
+                            <option value="gpt-4-turbo-preview">GPT-4 Turbo (OpenAI)</option>
+                            <option value="gpt-4">GPT-4 (Azure/OpenAI)</option>
+                            <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
+                            <option value="claude-3-opus-20240229">Claude 3 Opus</option>
+                            <option value="claude-3-sonnet-20240229">Claude 3 Sonnet</option>
+                            <option value="gemini-pro">Gemini Pro</option>
+                            <option value="llama2">Llama 2 (Ollama)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="max-tokens">Max Tokens</label>
+                        <input type="number" id="max-tokens" name="maxTokens" min="100" max="16000" value="4000">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="temperature">Temperature</label>
+                        <input type="number" id="temperature" name="temperature" min="0" max="1" step="0.1" value="0.1">
+                        <span class="help-text">Lower values = more focused, higher = more creative</span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancel-provider">Cancel</button>
+                        <button type="button" class="btn btn-info" id="validate-provider">
+                            <i class="fas fa-check"></i> Validate
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Provider
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

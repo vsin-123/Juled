@@ -1,0 +1,79 @@
+{
+  "version": "1.0.0",
+  "description": "File type definitions for the PR Security Scanner",
+  "categories": {
+    "database": {
+      "description": "Database and query files",
+      "scanner": "sql-scanner"
+    },
+    "configuration": {
+      "description": "Configuration files",
+      "scanner": "config-scanner"
+    },
+    "markup": {
+      "description": "Markup and documentation files",
+      "scanner": "markup-scanner"
+    },
+    "data": {
+      "description": "Data files",
+      "scanner": "data-scanner"
+    },
+    "container": {
+      "description": "Container and orchestration files",
+      "scanner": "infrastructure-scanner"
+    },
+    "infrastructure": {
+      "description": "Infrastructure as Code files",
+      "scanner": "infrastructure-scanner"
+    },
+    "build": {
+      "description": "Build and dependency files",
+      "scanner": "build-scanner"
+    }
+  },
+  "fileTypes": [
+    {
+      "name": "sql",
+      "extensions": [".sql"],
+      "category": "database",
+      "mimeTypes": ["application/sql", "text/x-sql"]
+    },
+    {
+      "name": "json",
+      "extensions": [".json", ".jsonc"],
+      "category": "configuration",
+      "filenames": ["package.json", "package-lock.json", "tsconfig.json"],
+      "mimeTypes": ["application/json"]
+    },
+    {
+      "name": "yaml",
+      "extensions": [".yml", ".yaml"],
+      "category": "configuration",
+      "mimeTypes": ["application/x-yaml", "text/yaml"]
+    },
+    {
+      "name": "xml",
+      "extensions": [".xml", ".xsd", ".xslt", ".wsdl"],
+      "category": "configuration",
+      "filenames": ["pom.xml", "web.xml"],
+      "mimeTypes": ["application/xml", "text/xml"]
+    },
+    {
+      "name": "dockerfile",
+      "extensions": [".dockerfile"],
+      "filenames": ["Dockerfile", "dockerfile"],
+      "category": "container"
+    },
+    {
+      "name": "terraform",
+      "extensions": [".tf", ".tfvars", ".hcl"],
+      "category": "infrastructure"
+    },
+    {
+      "name": "kubernetes",
+      "extensions": [".yaml", ".yml"],
+      "filenames": ["deployment.yaml", "service.yaml"],
+      "category": "container"
+    }
+  ]
+}
