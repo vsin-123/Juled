@@ -11,16 +11,23 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      - name: Checkout
+      - name: Checkout target repo
         uses: actions/checkout@v4
 
-      - name: AI PR Review
-        uses: vsin-123/DevSecOpsAI_PR_Guard@v1.0.1
+      - name: Checkout private action repo
+        uses: actions/checkout@v4
         with:
-          ai-key: ${{ secrets.AI_API_KEY }}
+          repository: vsin-123/DevSecOpsAI_PR_Guard
+          token: ${{ secrets.GH_PAT }}
+          path: DevSecOpsAI_PR_Guard
+
+      - name: AI PR Review
+        uses: ./DevSecOpsAI_PR_Guard
+        with:
+          ai-key: ${{ secrets.GEMINI_API_KEY }}
           provider: gemini
           #model: gemini-1.5-flash  # Optional: default gpt-4o-mini
-          max-files: 20       # Optional: default 20
-          mode: devsecops     # Optional: default devsecops
+          max-files: 20             # Optional: default 20
+          mode: devsecops           # Optional: default devsecops
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
