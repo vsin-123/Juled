@@ -26,7 +26,7 @@ jobs:
         with:
           ai-key: ${{ secrets.AI_API_KEY }}
           provider: gemini
-          #model: gemini-1.5-flash  # Optional: default gpt-4o-mini
+          model: gemini-1.5-flash  # Optional: default gpt-4o-mini
           max-files: 20             # Optional: default 20
           mode: devsecops           # Optional: default devsecops
         env:
